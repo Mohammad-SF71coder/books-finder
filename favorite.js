@@ -66,5 +66,26 @@ function createBookEl(book){
         bookEl.children[0].classList.add("active");
         containerEl.appendChild(bookEl);
         bookFlippening(bookEl, book);
+        removeFavorite(bookEl)
         }
+        
 }
+
+export function removeFavorite(bookEl, book){
+    bookEl.children[0].addEventListener("click", (e)=>{
+        e.stopPropagation();
+        bookEl.children[0].classList.toggle("active");
+        let bookIds = JSON.parse(localStorage.getItem("bookId")) || [];
+        if(!bookEl.children[0].classList.contains("active")){
+            bookEl.id = book.id;
+            bookIds.push(bookEl.id)
+            localStorage.setItem("bookId",JSON.stringify(bookIds))
+        }else{
+            let index =  bookIds.indexOf(bookEl.id);
+            bookIds.splice(index, 1);
+            localStorage.setItem("bookId",JSON.stringify(bookIds));
+            bookEl.remove();
+        }
+    })
+}
+

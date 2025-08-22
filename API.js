@@ -245,7 +245,7 @@ function addToFavorite(bookEl, book){
             let index =  bookIds.indexOf(bookEl.id);
             bookIds.splice(index, 1);
             localStorage.setItem("bookId",JSON.stringify(bookIds));
-            bookEl.remove();
+            
         }
     })
 }
